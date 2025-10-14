@@ -1,3 +1,13 @@
+#include "holberton.h"
+
+/**
+ * main - prints Holberton
+ *
+ * Description: prints Holberton
+ *
+ * Return: 0 (Success)
+ */
+
 int main(void)
 {
 	char text[10] = "Holberton";
