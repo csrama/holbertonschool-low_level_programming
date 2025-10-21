@@ -1,18 +1,10 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
- * main - Entry point of the program
- *
- * Return: Always 0 (Success)
+ * reset_to_98 - Updates the value pointed to by n to 98.
+ * @n: Pointer to an integer to update.
  */
-int main(void)
+void reset_to_98(int *n)
 {
-	int num = 42;
-
-	printf("Before: %d\n", num);
-	reset_to_98(&num);
-	printf("After: %d\n", num);
-
-	return (0);
+	*n = 98;
 }
