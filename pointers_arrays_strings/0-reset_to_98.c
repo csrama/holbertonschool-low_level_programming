@@ -1,10 +1,17 @@
 #include "main.h"
 
 /**
- * reset_to_98 - Updates the value pointed to by n to 98.
- * @n: Pointer to an integer to update.
+ * _puts - Prints a string followed by a new line to stdout
+ * @str: Pointer to the string to be printed
+ *
+ * Return: void
  */
-void reset_to_98(int *n)
+void _puts(char *str)
 {
-	*n = 98;
+	while (*str != '\0')
+	{
+		_putchar(*str);
+		str++;
+	}
+	_putchar('\n');
 }
