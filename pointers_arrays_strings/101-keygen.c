@@ -1,18 +1,30 @@
 #include <stdio.h>
-#include <main.h>
+#include <stdlib.h>
+#include <time.h>
 
-int main() {
-     int i;
-char password[9];
-char letters [] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+#define TARGET_SUM 2772
 
-        srand(time(null));
+/**
+ * main - generates a random valid password for 101-crackme
+ *
+ * Return: 0
+ */
+int main(void)
+{
+	int sum = 0;
+	char c;
 
-for (i = 0; i < 8; i++) {
-        password [i] = letters [rand() % 62];
+	srand(time(NULL));
+
+	while (sum < TARGET_SUM - 33)
+	{
+		c = (rand() % (126 - 33 + 1)) + 33;
+		putchar(c);
+		sum += c;
+	}
+
+	putchar(TARGET_SUM - sum);
+	putchar('\n');
+
+	return (0);
 }
- password[8] = '\0';
-
- printf("Password: %s\n", password);
-
-    return 0;
