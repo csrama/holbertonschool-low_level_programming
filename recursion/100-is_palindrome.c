@@ -1,30 +1,57 @@
 #include "main.h"
 
 /**
- * _is_prime_helper - checks if n is divisible by i recursively
- * @n: number to check
- * @i: current divisor
+ * _strlen_recursion - returns the length of a string
+ * @s: string to calculate length of
  *
- * Return: 1 if prime, 0 if not
+ * Return: length of the string
  */
-int _is_prime_helper(int n, int i)
+int _strlen_recursion(char *s)
 {
-	if (n <= 1)
+	if (*s == '\0')
+	{
 		return (0);
-	if (i * i > n)
-		return (1);
-	if (n % i == 0)
-		return (0);
-	return (_is_prime_helper(n, i + 1));
+	}
+	return (1 + _strlen_recursion(s + 1));
 }
 
 /**
- * is_prime_number - returns 1 if n is prime, 0 otherwise
- * @n: number to check
+ * check_palindrome - helper function to check if string is palindrome
+ * @s: string to check
+ * @start: starting index
+ * @end: ending index
  *
- * Return: 1 if prime, 0 if not
+ * Return: 1 if palindrome, 0 otherwise
  */
-int is_prime_number(int n)
+int check_palindrome(char *s, int start, int end)
 {
-	return (_is_prime_helper(n, 2));
+	if (start >= end)
+	{
+		return (1);
+	}
+
+	if (s[start] != s[end])
+	{
+		return (0);
+	}
+
+	return (check_palindrome(s, start + 1, end - 1));
+}
+
+/**
+ * is_palindrome - checks if a string is a palindrome
+ * @s: string to check
+ *
+ * Return: 1 if palindrome, 0 otherwise
+ */
+int is_palindrome(char *s)
+{
+	int len = _strlen_recursion(s);
+
+	if (len == 0)
+	{
+		return (1);
+	}
+
+	return (check_palindrome(s, 0, len - 1));
 }
