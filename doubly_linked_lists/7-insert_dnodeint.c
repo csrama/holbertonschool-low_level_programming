@@ -12,54 +12,38 @@
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
 	dlistint_t *new, *current;
-	unsigned int i;
+	unsigned int i = 0;
 
 	if (!h)
 		return (NULL);
-
-	/* Special case: insert at beginning (index 0) */
 	if (idx == 0)
 		return (add_dnodeint(h, n));
 
-	/* Create new node */
+	current = *h;
+	while (current && i < idx - 1)
+	{
+		current = current->next;
+		i++;
+	}
+
+	if (!current)
+	{
+		if (i == idx - 1)
+			return (add_dnodeint_end(h, n));
+		return (NULL);
+	}
+
 	new = malloc(sizeof(dlistint_t));
 	if (!new)
 		return (NULL);
 
 	new->n = n;
-	new->next = NULL;
-	new->prev = NULL;
+	new->next = current->next;
+	new->prev = current;
 
-	/* Traverse to the node before the insertion point */
-	current = *h;
-	i = 0;
+	if (current->next)
+		current->next->prev = new;
+	current->next = new;
 
-	while (current)
-	{
-		if (i == idx - 1)
-		{
-			/* Insert new node between current and current->next */
-			new->next = current->next;
-			new->prev = current;
-
-			if (current->next)
-				current->next->prev = new;
-
-			current->next = new;
-			return (new);
-		}
-		current = current->next;
-		i++;
-	}
-
-	/* If idx is exactly one past the end, add at the end */
-	if (i == idx)
-	{
-		free(new);
-		return (add_dnodeint_end(h, n));
-	}
-
-	/* Index out of bounds */
-	free(new);
-	return (NULL);
+	return (new);
 }
